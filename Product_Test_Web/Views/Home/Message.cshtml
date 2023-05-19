@@ -1,0 +1,18 @@
+﻿@model Product_Test_Web.ViewModels.MessageViewModel
+
+@{
+    ViewData["Title"] = "Message";
+}
+
+<h1>Message</h1>
+
+@if (Model.Flag)
+{
+    <div class="p-3 mb-2 bg-success text-white">@Model.Message</div>
+}
+else
+{
+    <div class="p-3 mb-2 bg-danger text-white">@Model.Message</div>
+}
+@*<h2>@ViewBag.Message</h2>*@
+
