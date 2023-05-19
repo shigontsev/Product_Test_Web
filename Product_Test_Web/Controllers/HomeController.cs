@@ -1,61 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.IdentityModel.Tokens;
 using Product_Test_Web.Models;
 using Product_Test_Web.ViewModels;
-using System.Diagnostics;
 
 namespace Product_Test_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        private ProductManager _pM = new ProductManager();
+        private ProductManager _pM;
 
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
+            _pM = new ProductManager();
         }
-
-        //public IActionResult Index(string? name, int? categoryId)
-        //{
-        //    var categorys = new List<Category>
-        //    {
-        //        new Category()
-        //        {
-        //            Id = 0,
-        //            Name = "All"
-        //        }
-        //    };
-        //    categorys.AddRange(_pM.GetAllCategory());
-
-        //    //ViewBag.Categorys = new SelectList(_pM.GetAllCategory(), "Id", "Name");
-        //    ViewBag.Categorys = new SelectList(categorys, "Id", "Name");
-
-        //    //List<ProductFullModel> products;
-
-        //    //if (string.IsNullOrEmpty(name) && (categoryId == 0 || categoryId == null))
-        //    //{
-        //    //    products = _pM.GetAllProducts();
-        //    //    return View(products);
-        //    //}
-        //    //if (!string.IsNullOrEmpty(name) && categoryId == 0)
-        //    //{
-        //    //    products= _pM.GetAllProducts().Where(x=>x.Name.Contains(name)).ToList();
-        //    //    return View(products);
-        //    //}
-        //    //if (string.IsNullOrEmpty(name))
-        //    //{
-        //    //    products = _pM.GetAllProducts().Where(x => x.CategoryId == categoryId).ToList();
-        //    //    return View(products);
-        //    //}
-        //    //products = _pM.GetAllProducts().Where(x => x.Name.Contains(name) && x.CategoryId == categoryId).ToList();
-
-        //    List<ProductFullModel> products = _pM.GetProductsByNameOrCategory(name, categoryId);
-
-        //    return View(products);
-        //}
 
         public IActionResult Index(string? name, int? categoryId)
         {
@@ -69,27 +26,7 @@ namespace Product_Test_Web.Controllers
             };
             categorys.AddRange(_pM.GetAllCategory());
 
-            //ViewBag.Categorys = new SelectList(_pM.GetAllCategory(), "Id", "Name");
             ViewBag.Categorys = new SelectList(categorys, "Id", "Name");
-
-            //List<ProductFullModel> products;
-
-            //if (string.IsNullOrEmpty(name) && (categoryId == 0 || categoryId == null))
-            //{
-            //    products = _pM.GetAllProducts();
-            //    return View(products);
-            //}
-            //if (!string.IsNullOrEmpty(name) && categoryId == 0)
-            //{
-            //    products= _pM.GetAllProducts().Where(x=>x.Name.Contains(name)).ToList();
-            //    return View(products);
-            //}
-            //if (string.IsNullOrEmpty(name))
-            //{
-            //    products = _pM.GetAllProducts().Where(x => x.CategoryId == categoryId).ToList();
-            //    return View(products);
-            //}
-            //products = _pM.GetAllProducts().Where(x => x.Name.Contains(name) && x.CategoryId == categoryId).ToList();
 
             List<ProductFullModel> products = _pM.GetProductsByNameOrCategory(name, categoryId);
 
@@ -117,8 +54,7 @@ namespace Product_Test_Web.Controllers
         public IActionResult AddCategory(Category model)
         {
             var a = _pM.AddCategory(model.Name);
-            //return View(products);
-            //return RedirectToAction("~/Home/About", new { messege = "" });
+
             if (a)
                 return RedirectToAction("Message", "Home", new { 
                     message = $"Добавление категории успешно. Категория с Именем \"{model.Name}\"  создана",
@@ -187,7 +123,6 @@ namespace Product_Test_Web.Controllers
 
         public IActionResult Message(string message, bool flag)
         {
-            //ViewBag.Message = message;
             var m = new MessageViewModel { 
                 Message = message,
                 Flag = flag
@@ -195,17 +130,5 @@ namespace Product_Test_Web.Controllers
             return View(m);
         }
 
-
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

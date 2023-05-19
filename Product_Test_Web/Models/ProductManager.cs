@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Product_Test_Web.Models
+﻿namespace Product_Test_Web.Models
 {
     public class ProductManager
     {
@@ -36,16 +34,6 @@ namespace Product_Test_Web.Models
             {
                 if (db.Product.Count() > 0)
                 {
-                    //products = (List<ProductFullModel>)(from product in db.Product
-                    //                                    join category in db.Category on product.CategoryId equals category.Id
-                    //                                    select new ProductFullModel
-                    //                                    {
-                    //                                        Id = product.Id,
-                    //                                        Name = product.Name,
-                    //                                        Description = product.Description,
-                    //                                        CategoryId = product.CategoryId,
-                    //                                        CategoryName = category.Name
-                    //                                    }).ToList();
                     if (string.IsNullOrWhiteSpace(name) && (categoryId == 0 || categoryId == null))
                     {
                         products = GetAllProducts();
@@ -149,17 +137,6 @@ namespace Product_Test_Web.Models
             ProductFullModel productFull = new ProductFullModel();
             using (db = new ApplicationContext())
             {
-                //productFull = (from product in db.Product
-                //               join category in db.Category on product.CategoryId equals category.Id
-                //               where product.Id == id
-                //               select new ProductFullModel
-                //               {
-                //                   Id = product.Id,
-                //                   Name = product.Name,
-                //                   Description = product.Description,
-                //                   CategoryId = product.CategoryId,
-                //                   CategoryName = category.Name
-                //               }).FirstOrDefault(x => x.Id.Equals(id));
                 productFull = db.Product.Join(db.Category, p => p.CategoryId,
                     c => c.Id,
                     (p, c) => new ProductFullModel
