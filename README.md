@@ -5,7 +5,7 @@
 БД:
 Таблицы
 
--Product
+- Product
 
 ![image](https://github.com/shigontsev/Product_Test_Web/assets/17554278/462ca2e6-945a-4c13-908f-4c0bca99e024)
 
@@ -13,7 +13,11 @@
 
 ![image](https://github.com/shigontsev/Product_Test_Web/assets/17554278/1c4f8af2-cb7d-4afa-aaee-65303ca36cf1)
 
-Веб приложение написано на Asp.Net MVC CORE
+Видео демка находится в папке "/Demo".
+Скрипт создания БД в папке "/DB_script".
+
+Веб приложение написано на Asp.Net MVC CORE, база данных в MS SQL Server
+
 Обладает функциями:
 1) Товары:
   - Выводить список;
@@ -24,3 +28,5 @@
 2) Категории:
   - Выводить список
   - Добавлять новую категорию
+
+
