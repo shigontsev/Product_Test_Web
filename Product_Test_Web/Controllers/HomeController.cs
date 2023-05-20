@@ -9,7 +9,7 @@ namespace Product_Test_Web.Controllers
     {
         private ProductManager _pM;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
             _pM = new ProductManager();
         }
